@@ -18,3 +18,9 @@ const create = ({vin,make,model,mileage,title,transmission}) => {
          .insert({vin,make,model,mileage,title,transmission})
          .then(([id])=> getById(id))
 }
+
+module.exports={
+  getAll,
+  getById,
+  create
+}
