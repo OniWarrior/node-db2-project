@@ -15,8 +15,8 @@ const getById = (id) => {
 const create = ({vin,make,model,mileage,title,transmission}) => {
   // DO YOUR MAGIC
   return db('cars')
-         .insert({vin,make,model,mileage,title,transmission})
-         .then(([id])=> getById(id))
+         .insert([{vin,make,model,mileage,title,transmission}])
+         .then((id)=> getById(id))
 }
 
 module.exports={

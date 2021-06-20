@@ -6,7 +6,7 @@ exports.up = function(knex){
         table.text('vin',100).unique().notNullable()
         table.text('make',128).notNullable()
         table.text('model',128).notNullable()
-        table.int('mileage').notNullable()
+        table.integer('mileage').notNullable()
         table.text('title',128)
         table.text('transmission',100)
     })

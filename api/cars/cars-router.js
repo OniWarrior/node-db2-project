@@ -26,26 +26,12 @@ router.get('/:id',checkCarId,(req,res,next)=>{
     .catch(error =>next(error))
 })
 
-router.post('/',checkCarId,
+router.post('/',
               checkCarPayload,
               checkVinNumberValid,
               checkVinNumberUnique,(req,res,next)=>{
-     const {
-         vin,
-         make,
-         model,
-         mileage,
-         title,
-         transmission
-     } = req.body
-     Cars.create({
-         vin,
-         make,
-         model,
-         mileage,
-         title,
-         transmission
-     })
+    
+     Cars.create(req.body)
      .then(newCar=>{
          res.status(201).json(newCar)
      })
@@ -57,4 +43,7 @@ router.use((err, req, res, next) => {
     
     res.status(500).json({ message: err.message, stack: err.stack })
   })
+
+
+  module.exports = router
 
