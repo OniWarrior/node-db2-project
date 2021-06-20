@@ -1,4 +1,5 @@
 const Cars = require('./cars-model')
+const vinValidator = require('vin-validator')
 
 const checkCarId = (req, res, next) => {
   // DO YOUR MAGIC
@@ -26,7 +27,7 @@ const checkCarId = (req, res, next) => {
 
 const checkCarPayload = (req, res, next) => {
   // DO YOUR MAGIC
-  // Destructure payload from req.body
+  // Destructure payload from req.body-- title and transmission are ommitted because they're optional.
   const {
     vin,
     make,
@@ -68,6 +69,22 @@ const checkCarPayload = (req, res, next) => {
 
 const checkVinNumberValid = (req, res, next) => {
   // DO YOUR MAGIC
+  const{vin}=req.body
+  vinValidator(vin)
+  .then(validatedVin=>{
+    if(validatedVin){
+      req.vin = validatedVin
+      next()
+    }
+    else{
+      next({
+        status:400,
+        message:`vin ${validatedVin}is invalid`
+      })
+    }
+  })
+  .catch(error => next(error))
+
 }
 
 const checkVinNumberUnique = (req, res, next) => {
