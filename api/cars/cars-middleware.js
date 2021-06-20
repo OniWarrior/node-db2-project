@@ -111,5 +111,5 @@ module.exports={
   checkCarId,
   checkCarPayload,
   checkVinNumberValid,
-  checkVinNumberValid
+  checkVinNumberUnique
 }
