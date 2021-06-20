@@ -89,4 +89,27 @@ const checkVinNumberValid = (req, res, next) => {
 
 const checkVinNumberUnique = (req, res, next) => {
   // DO YOUR MAGIC
+  const {vin}= req.body
+
+  Cars.getAll()
+  .then(cars=>{
+    cars.forEach(element => {
+      if(element.vin ===vin){
+        next({
+          status:400,
+          message:`vin ${vin} already exists`
+        })
+      }      
+    });
+    next()
+  })
+  .catch(error =>next(error))
+
+}
+
+module.exports={
+  checkCarId,
+  checkCarPayload,
+  checkVinNumberValid,
+  checkVinNumberValid
 }
